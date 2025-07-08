@@ -1,0 +1,54 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--no-cache'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/whatsapp-agent-prosus:latest'
+      - '.'
+    id: 'build-image'
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/whatsapp-agent-prosus:latest'
+    id: 'push-image'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'whatsapp-agent-prosus'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/whatsapp-agent-prosus:latest'
+      - '--region'
+      - 'europe-west1'
+      - '--platform'
+      - 'managed'
+      - '--port'
+      - '8080'
+      - '--memory'
+      - '4GB'
+      - '--cpu'
+      - '1'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '1'
+      - '--concurrency'
+      - '80'
+      - '--timeout'
+      - '300'
+      - '--set-env-vars'
+      - 'ENVIRONMENT=production'
+    id: 'deploy-to-cloudrun'
+
+images:
+  - 'gcr.io/$PROJECT_ID/whatsapp-agent-prosus:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY 
