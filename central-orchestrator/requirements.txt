@@ -1,0 +1,13 @@
+langgraph
+langchain-core
+langchain-google-genai
+langchain-community
+tavily-python
+requests
+python-dotenv
+pydantic
+fastapi
+uvicorn
+watchfiles
+httpx
+mcp
