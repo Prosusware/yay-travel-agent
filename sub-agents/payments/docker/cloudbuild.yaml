@@ -1,0 +1,46 @@
+steps:
+  - name: 'python:3.11'
+    id: Install dependencies
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Build Docker image
+    args:
+      [ 'build', '-f', 'docker/Dockerfile', '-t', 'gcr.io/$PROJECT_ID/checkout-agent:latest', '.' ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Push Docker image
+    args:
+      [ 'push', 'gcr.io/$PROJECT_ID/checkout-agent:latest' ]
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: Deploy to Cloud Run
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'checkout-agent'
+      - '--image=gcr.io/$PROJECT_ID/checkout-agent:latest'
+      - '--region=europe-west1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=ENV=production'
+      - '--memory=6Gi'
+      - '--cpu=2'
+      - '--max-instances=20'
+      - '--concurrency=5'
+      - '--port=8080'
+      - '--timeout=900s'
+      - '--cpu-throttling'
+      - '--labels=app=checkout-agent,env=production'
+
+images:
+  - 'gcr.io/$PROJECT_ID/checkout-agent:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,12 @@
+# Core dependencies for the booking agent
+skyvern>=0.2.1
+python-dotenv>=1.0.0
+
+# FastAPI and web server dependencies
+fastapi>=0.115.14
+uvicorn[standard]>=0.24.0
+pydantic[email]>=2.11.7
+pydantic-settings>=2.10.1
+
+# HTTP client for webhook and status API calls
+httpx>=0.24.0
