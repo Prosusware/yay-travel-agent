@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+gunicorn
+tavily-python
+pymongo
+email-validator
+chromadb
+numpy
+python-dotenv
+requests
