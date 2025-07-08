@@ -1,0 +1,810 @@
+[
+  {
+    "name": "web_search",
+    "description": "Search the web for information using Tavily API with LLM-optimized response format",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/search",
+      "method": "GET",
+      "path_params_schema": [],
+      "query_params_schema": [
+        {
+          "id": "query",
+          "type": "string",
+          "value_type": "llm_prompt",
+          "description": "The search query to find information on the web",
+          "dynamic_variable": "",
+          "constant_value": "",
+          "required": true
+        }
+      ],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "add_contact",
+    "description": "Add a new contact to a user's contact list",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/contacts/add",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Contact information to add",
+        "properties": [
+          {
+            "id": "UserID",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The user ID to add the contact to",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "contact",
+            "type": "object",
+            "value_type": "llm_prompt",
+            "description": "Contact details with email (required), FirstName, LastName, nickname, phoneNumber",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true,
+            "properties": [
+              {
+                "id": "email",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Contact email address (required)",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": true
+              },
+              {
+                "id": "FirstName",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Contact first name",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "LastName",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Contact last name",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "nickname",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Contact nickname",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "phoneNumber",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Contact phone number",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              }
+            ]
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+      "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "update_contact",
+    "description": "Update an existing contact with additional or modified information",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/contacts/update",
+      "method": "PATCH",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Contact update information with UserID, contact_uid, and contact details",
+        "properties": [
+          {
+            "id": "UserID",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The user ID who owns the contact",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "contact_uid",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The unique ID of the contact to update",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "contact",
+            "type": "object",
+            "value_type": "llm_prompt",
+            "description": "Updated contact details (email, FirstName, LastName, nickname, phoneNumber)",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true,
+            "properties": [
+              {
+                "id": "email",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Updated email address",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "FirstName",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Updated first name",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "LastName",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Updated last name",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "nickname",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Updated nickname",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              },
+              {
+                "id": "phoneNumber",
+                "type": "string",
+                "value_type": "llm_prompt",
+                "description": "Updated phone number",
+                "dynamic_variable": "",
+                "constant_value": "",
+                "required": false
+              }
+            ]
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+      "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "get_contacts",
+    "description": "Get all contacts for a specific user",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/contacts/{user_id}",
+      "method": "GET",
+      "path_params_schema": [
+        {
+          "id": "user_id",
+          "type": "string",
+          "value_type": "llm_prompt",
+          "description": "The user ID to get contacts for",
+          "dynamic_variable": "",
+          "constant_value": "",
+          "required": true
+        }
+      ],
+      "query_params_schema": [],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "add_memory",
+    "description": "Add a memory to the vector database for a user or contact",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/memory/add",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Memory information to store with user_id, memory text, and optional contact_id or email",
+        "properties": [
+          {
+            "id": "user_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The user ID to associate the memory with",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "memory",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The memory content to store",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "contact_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Optional contact ID if this is a contact-specific memory",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          },
+          {
+            "id": "email",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Optional email address to associate with the memory",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "search_memory",
+    "description": "Search memory using natural language query",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/memory/search",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Memory search with user_id, query, and optional n_results and search_all_collections",
+        "properties": [
+          {
+            "id": "user_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The user ID to search memories for",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "query",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The search query to find relevant memories",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "n_results",
+            "type": "integer",
+            "value_type": "constant",
+            "description": "Number of results to return",
+            "dynamic_variable": "",
+            "constant_value": "10",
+            "required": false
+          },
+          {
+            "id": "search_all_collections",
+            "type": "boolean",
+            "value_type": "constant",
+            "description": "Whether to search all collections",
+            "dynamic_variable": "",
+            "constant_value": "false",
+            "required": false
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 20,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "add_vector_docs",
+    "description": "Add documents to a ChromaDB collection with automatic embedding",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/vector/documents/add",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Documents to add with collection_name, documents array, ids array, and optional metadatas",
+        "properties": [
+          {
+            "id": "collection_name",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Name of the collection to add documents to",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "documents",
+            "type": "array",
+            "value_type": "llm_prompt",
+            "description": "Array of document texts to add",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "ids",
+            "type": "array",
+            "value_type": "llm_prompt",
+            "description": "Array of unique IDs for the documents",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "metadatas",
+            "type": "array",
+            "value_type": "llm_prompt",
+            "description": "Optional array of metadata objects for each document",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 30,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "query_vector_docs",
+    "description": "Query documents from a ChromaDB collection using semantic search",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/vector/documents/query",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Query parameters with collection_name, query_texts array, and optional n_results, where, include",
+        "properties": [
+          {
+            "id": "collection_name",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Name of the collection to query",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "query_texts",
+            "type": "array",
+            "value_type": "llm_prompt",
+            "description": "Array of query texts to search for",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "n_results",
+            "type": "integer",
+            "value_type": "constant",
+            "description": "Number of results to return",
+            "dynamic_variable": "",
+            "constant_value": "10",
+            "required": false
+          },
+          {
+            "id": "where",
+            "type": "object",
+            "value_type": "llm_prompt",
+            "description": "Optional metadata filter conditions",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          },
+          {
+            "id": "include",
+            "type": "array",
+            "value_type": "llm_prompt",
+            "description": "Optional list of fields to include in results",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 25,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "write_status",
+    "description": "Write a status update to the database for tracking agent activities",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/status/write",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Status update with agent_id, agent_type, conversation_id, and update message",
+        "properties": [
+          {
+            "id": "agent_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Unique identifier for the agent",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "agent_type",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Type of agent (e.g., assistant, researcher, etc.)",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "conversation_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Unique identifier for the conversation",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "update",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The status update message",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 15,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "read_status",
+    "description": "Read status updates from the database with optional filtering",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/status/read",
+      "method": "POST",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Filter parameters with conversation_id and optional agent_type, agent_id",
+        "properties": [
+          {
+            "id": "conversation_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Conversation ID to filter status updates",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "agent_type",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Optional agent type filter",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          },
+          {
+            "id": "agent_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "Optional specific agent ID filter",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": false
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+              "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 15,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "api_health",
+    "description": "Check the health status of all API services",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/health",
+      "method": "GET",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 10,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "db_status",
+    "description": "Get database connection status and statistics",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/database/status",
+      "method": "GET",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 10,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "vector_status",
+    "description": "Get ChromaDB connection status and statistics",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/vector/status",
+      "method": "GET",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 10,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "get_user",
+    "description": "Get the entire user object from the database by their _id",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/user/{user_id}",
+      "method": "GET",
+      "path_params_schema": [
+        {
+          "id": "user_id",
+          "type": "string",
+          "value_type": "llm_prompt",
+          "description": "The user's _id in the database",
+          "dynamic_variable": "",
+          "constant_value": "",
+          "required": true
+        }
+      ],
+      "query_params_schema": [],
+      "request_body_schema": null,
+      "request_headers": [],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 10,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  },
+  {
+    "name": "update_conversation_name",
+    "description": "Update the name field of a conversation in the Conversations collection",
+    "type": "webhook",
+    "api_schema": {
+      "url": "https://global-tools-api-534113739138.europe-west1.run.app/api/conversations/name",
+      "method": "PATCH",
+      "path_params_schema": [],
+      "query_params_schema": [],
+      "request_body_schema": {
+        "id": "body",
+        "type": "object",
+        "description": "Conversation name update with conversation_id and new name",
+        "properties": [
+          {
+            "id": "conversation_id",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The unique identifier of the conversation to update",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          },
+          {
+            "id": "name",
+            "type": "string",
+            "value_type": "llm_prompt",
+            "description": "The new name for the conversation (1-500 characters)",
+            "dynamic_variable": "",
+            "constant_value": "",
+            "required": true
+          }
+        ],
+        "required": true,
+        "value_type": "llm_prompt"
+      },
+      "request_headers": [
+        {
+          "name": "Content-Type",
+          "type": "value",
+          "value": "application/json",
+          "description": "Content type header"
+        }
+      ],
+      "auth_connection": null
+    },
+    "response_timeout_secs": 15,
+    "dynamic_variables": {
+      "dynamic_variable_placeholders": {}
+    }
+  }
+] 
