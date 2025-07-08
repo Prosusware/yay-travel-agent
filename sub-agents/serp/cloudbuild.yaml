@@ -1,0 +1,27 @@
+steps:
+  # Build the container image for the Python MCP server
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/serp-mcp:latest', '.']
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/serp-mcp:latest']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'serp-mcp'
+      - '--image=gcr.io/$PROJECT_ID/serp-mcp:latest'
+      - '--region=europe-west1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=8080'
+      # env.yaml is optional, but recommended for secrets like SERPAPI_API_KEY
+      # - '--env-vars-file=env.yaml'
+
+# Images to be stored in Container Registry
+images:
+  - 'gcr.io/$PROJECT_ID/serp-mcp:latest'
