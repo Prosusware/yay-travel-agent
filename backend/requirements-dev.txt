@@ -1,0 +1,5 @@
+pytest
+httpx
+pytest-asyncio
+mock
+python-multipart 
