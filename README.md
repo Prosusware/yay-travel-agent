@@ -15,11 +15,11 @@ Yay Travel Agent is a web application designed to help users plan their travel i
 ## Team
 This project was built at the LabLab.ai Raise Your Hack Hackathon
 
-- Charlie Cheesman
-- Fergus Mckenzie-Wilson
-- Ana Shevchenko
-- Marissa Liu
-- Alex Choi
+- <a href="https://github.com/Ches-ctrl">Charlie Cheesman</a>
+- <a href="https://github.com/fergus-mw">Fergus Mckenzie-Wilson</a>
+- <a href="https://github.com/a17o">Ana Shevchenko</a>
+- <a href="https://github.com/mariarchy">Marissa Liu</a>
+- <a href="https://github.com/alexechoi">Alex Choi</a>
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
