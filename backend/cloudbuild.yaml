@@ -1,0 +1,46 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/yaytravel-backend:latest"
+      - "."
+
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "gcr.io/$PROJECT_ID/yaytravel-backend:latest"
+
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "yaytravel-backend"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/yaytravel-backend:latest"
+      - "--region"
+      - "europe-west1" # Change to your preferred region
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
+      #
+      # The following section shows how to mount secrets from Google Secret Manager.
+      # You must create these secrets in your GCP project first.
+      #
+      # - "--update-secrets"
+      # - "MONGODB_URL=MONGODB_URL:latest"
+      # - "SECRET_KEY=SECRET_KEY:latest"
+      # - "ALGORITHM=ALGORITHM:latest"
+      # - "ACCESS_TOKEN_EXPIRE_MINUTES=ACCESS_TOKEN_EXPIRE_MINUTES:latest"
+
+images:
+  - "gcr.io/$PROJECT_ID/yaytravel-backend:latest"
+
+# If you are using secrets from Secret Manager, you need to give
+# the Cloud Build service account access to them.
+# options:
+#   logging: CLOUD_LOGGING_ONLY 
