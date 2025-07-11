@@ -2,6 +2,9 @@
 
 Yay Travel Agent
 
+## Sign up
+[Sign up here: yay.travel](https://www.yay.travel/)
+
 ## Project Description
 Yay Travel Agent is a web application designed to help users plan their travel itineraries efficiently. It provides a user-friendly interface to search for destinations, book accommodations, and manage travel schedules.
 
